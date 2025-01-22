@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import pug from "pug";
 import { convert } from "html-to-text";
- 
+
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -17,16 +17,16 @@ export default class Email {
   }
 
   newTransport() {
-    if (process.env.NODE_ENV === "production") {
-      // Production mode (using SendGrid, for example)
-      return nodemailer.createTransport({
-        service: "SendGrid",
-        auth: {
-          user: process.env.SENDGRID_USERNAME,
-          pass: process.env.SENDGRID_PASSWORD,
-        },
-      });
-    }
+    // if (process.env.NODE_ENV === "production") {
+    //   // Production mode (using SendGrid, for example)
+    //   return nodemailer.createTransport({
+    //     service: "SendGrid",
+    //     auth: {
+    //       user: process.env.SENDGRID_USERNAME,
+    //       pass: process.env.SENDGRID_PASSWORD,
+    //     },
+    //   });
+    // }
 
     // Development mode or Gmail in production
     return nodemailer.createTransport({
