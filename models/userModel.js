@@ -55,6 +55,56 @@ const userSchema = new mongoose.Schema(
       enum: ["verified", "rejected", "pending"],
       default: "pending",
     },
+
+    governmentIdNumber: {
+      type: String,
+    },
+    idDocumentUpload: {
+      type: String, // URL or path to the uploaded ID document (Image or PDF)
+      default: "default_id_doc.jpg",
+    },
+    phoneNumber: {
+      type: String,
+    },
+
+    residentialAddress: {
+      street: { type: String },
+      city: { type: String, },
+      state: { type: String, },
+      zipCode: { type: String, },
+      country: { type: String, },
+    },
+    hospitalDetails: {
+      hospitalName: {
+        type: String,
+      },
+      employeeId: {
+        type: String,
+      },
+      position: {
+        type: String,
+      },
+      idCardNumber: {
+        type: String,
+      },
+      idCardIssueDate: {
+        type: Date,
+      },
+      idCardExpiryDate: {
+        type: Date,
+      },
+      idCardPhoto: {
+        type: String,
+      },
+      hospitalContact: {
+        phone: {
+          type: String,
+        },
+        email: {
+          type: String,
+        },
+      },
+    },
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,

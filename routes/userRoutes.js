@@ -26,4 +26,7 @@ router.patch(
 );
 // router.post('/request-school-access', userController.requestSchoolAccess);
 router.patch("/deleteMe", userController.deleteMe);
+
+// Admin Complete Profile
+router.post('/complete-profile', userController.completeProfile);
 export default router;

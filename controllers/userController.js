@@ -115,6 +115,43 @@ export const deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 
+export const completeProfile = catchAsync(async (req, res, next) => {
+  // 1) Create error if user POSTs password data
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(
+      new AppError(
+        "This route is not for password updates. Please use /updateMyPassword.",
+        400
+      )
+    );
+  }
+
+  // 2) Filtered out unwanted fields names that are not allowed to be updated
+  const filteredBody = { ...req.body };
+  if (filteredBody.role) delete filteredBody.role;
+  delete filteredBody.email;
+
+  // const filteredBody = filterObj(req.body, "name", "email");
+  if (req.file) filteredBody.photo = req.file.filename;
+  // console.log(req.file.filename);
+  // console.log(filteredBody.photo);
+  // console.log(filteredBody);
+
+  // 3) Update user document
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
+    new: true,
+    runValidators: true,
+  });
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      user: updatedUser,
+    },
+  });
+
+
+});
 export const getUser = factory.getOne(User);
 
 // export const approveSchoolAccess = catchAsync(async (req, res, next) => {
