@@ -1,0 +1,17 @@
+extends baseEmail
+
+block content
+  p Hi #{firstName},
+  p Welcome to Resource Hive, we're glad to have you 🎉🙏
+  p We're all a big family here at Resource Hive! To strengthen our community and help everyone connect better, we encourage you to upload your user photo. This way, we can put faces to names and foster a more personal experience as we embark on this journey together!
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') Upload user photo
+  p If you need any help with Resourcive Hive, please don't hesitate to contact me!
+  p - Sahil Krishna, CEO
