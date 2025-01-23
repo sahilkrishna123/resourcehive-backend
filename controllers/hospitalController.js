@@ -4,21 +4,63 @@ import * as factory from "./handlerFactory.js";
 import * as userController from "./userController.js";
 import AdminApprovals from "../models/adminApprovals.js";
 import User from "../models/userModel.js";
+import Hospital from "../models/hospitalModel.js";
+import AppError from "../utils/appError.js";
 
-// export const registerSchool = catchAsync(async (req, res, next) => {
-//   //schoolApprovalRequest function called
-//   userController.schoolApprovalRequest(req, res, next);
-//   // factory.createOne(School);
-// });
-// export const getRegisteredSchools = catchAsync(async (req, res, next) => {
-//   const user = req.user;
-//   const doc = await user.populate("registeredSchool");
+export const registerHospital = catchAsync(async (req, res, next) => {
+  const newData = await Hospital.create(req.body);
+  res.status(201).json({
+    status: 'success',
+    data: newData
+  })
+});
+export const getAllHospitals = catchAsync(async (req, res, next) => {
+  const allHospitals = await Hospital.find();
+  res.status(200).json({
+    status: 'success',
+    results: allHospitals.length,
+    data: allHospitals,
+  });
+});
 
-//   res.status(200).json({
-//     data: user,
-//   });
-// });
+export const updateHospital = catchAsync(async (req, res, next) => {
+  // 1) Filter out unwanted fields that are not allowed to be updated
+  const filteredBody = { ...req.body };
+  delete filteredBody.hospitalId; // Unique identifier - not updatable
+  delete filteredBody.registrationNumber; // Not updatable
+  delete filteredBody.establishedDate; // Historical info - not updatable
+  delete filteredBody.approvalStatus;
+  delete filteredBody.active;
 
+  // 2) Update hospital document
+  const updatedHospital = await Hospital.findByIdAndUpdate(req.params.hospitalId, filteredBody, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!updatedHospital) {
+    return next(new AppError("No hospital found with that ID", 404));
+  }
+
+  // 3) Send success response
+  res.status(200).json({
+    status: "success",
+    data: {
+      hospital: updatedHospital,
+    },
+  });
+});
+
+export const deleteHospital = catchAsync(async (req, res, next) => {
+  const doc = await Hospital.findOneAndDelete(req.params.hospitalId);
+  if (!doc) {
+    return next(new AppError("No document found with that ID", 404));
+  }
+  res.status(204).json({
+    status: "success",
+    data: null,
+  });
+});
 export const hospitalJoiningRequest = catchAsync(async (req, res, next) => {
   // Joining request submission by verified Users
   const request = await AdminApprovals.create({

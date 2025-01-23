@@ -21,11 +21,19 @@ router.patch(
   authController.restrictTo("admin"),
   hospitalController.joiningRequestApproval
 );
+// router.use(authController.restrictTo("admin"));
 
+router.get("/registered-hospitals", authController.protect, hospitalController.getAllHospitals);
+
+// Admin Restricted Area !!!!!
 router.use(authController.protect, authController.restrictTo("admin"));
-// router.post("/register", schoolController.registerSchool);
+router.post("/register-hospital", hospitalController.registerHospital);
+router
+  .route("/:hospitalId")
+  .patch(hospitalController.updateHospital)
+  .delete(hospitalController.deleteHospital);
 
-// router.get("/registered-schools", schoolController.getRegisteredSchools);
+
 
 // router
 //   .route("/:id")
