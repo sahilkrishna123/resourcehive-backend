@@ -102,6 +102,26 @@ export const joiningRequestApproval = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+export const joiningTechnicianRequestApproval = catchAsync(async (req, res, next) => {
+  const approval = await User.findByIdAndUpdate(
+    req.params.userId,
+    {
+      $set: {
+        hospitalId: req.params.hospitalId,
+        role: req.body.role,
+      },
+    },
+    { new: true }
+  );
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      approval,
+    },
+  });
+});
 export const getAllRequests = catchAsync(async (req, res, next) => {
   const data = await AdminApprovals
     .find({ hospitalId: req.params.hospitalId })
@@ -112,6 +132,20 @@ export const getAllRequests = catchAsync(async (req, res, next) => {
     results: data.length,
     data: data
   })
+});
+export const getAllTechniciansRequests = catchAsync(async (req, res, next) => {
+  // Fetch data and populate the userId field
+  const data = await AdminApprovals.find({ hospitalId: req.params.hospitalId })
+    .populate('userId');  // Populate userId with the full user details
+
+  // Filter data to only include requests where requestedRole is 'technician'
+  const techniciansData = data.filter(item => item.userId.requestedRole === 'technician');
+
+  res.status(200).json({
+    status: 'success',
+    results: techniciansData.length,
+    data: techniciansData
+  });
 });
 
 // export const getSchool = factory.getOne(School);

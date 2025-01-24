@@ -27,6 +27,21 @@ router.get("/:hospitalId/get-approval-requests",
   authController.restrictTo("admin"),
   hospitalController.getAllRequests);
 
+// Hospital request's approval by ADMIN & Manager only
+router.patch(
+  "/hospital-technician-request-approval/:hospitalId/:userId",
+  authController.protect,
+  authController.restrictTo('admin', 'manager'),
+  hospitalController.joiningTechnicianRequestApproval
+);
+
+// Get All Approval Requests by ADMIN & Manager only
+router.get("/:hospitalId/get-approval-technicians-requests",
+  authController.protect,
+  authController.restrictTo("admin", "manager"),
+  hospitalController.getAllTechniciansRequests);
+
+
 // router.use(authController.restrictTo("admin"));
 
 router.get("/registered-hospitals", authController.protect, hospitalController.getAllHospitals);
