@@ -10,11 +10,15 @@ const router = express.Router();
 // {{URL}}api/v1/equipments/iot-data/:udiNumber
 
 // Dummy API send data to this location i.e iot-data
-router.route("/iot-data/:udiNumber").post(equipmentController.processIotData);
+router
+  .route("/iot-data/:udiNumber")
+  .post(equipmentController.processIotData);
 
 // Protected routes
-router.use(authController.protect);
-router.route("/:hospitalId").get(equipmentController.getAllEquipments).post(equipmentController.createEquipment);
+router.use(authController.protect, authController.restrictTo('admin', 'manager'));
+router.route("/:hospitalId")
+  .get(equipmentController.getAllEquipments)
+  .post(equipmentController.createEquipment);
 
 router
   .route("/:hospitalId/:equipmentId")

@@ -9,6 +9,12 @@ import AppError from "../utils/appError.js";
 
 export const registerHospital = catchAsync(async (req, res, next) => {
   const newData = await Hospital.create(req.body);
+  // console.log(newData._id);
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, { hospitalId: newData._id }, {
+    new: true,
+    runValidators: true,
+  })
+  // console.log(updatedUser);
   res.status(201).json({
     status: 'success',
     data: newData
@@ -95,6 +101,17 @@ export const joiningRequestApproval = catchAsync(async (req, res, next) => {
       approval,
     },
   });
+});
+export const getAllRequests = catchAsync(async (req, res, next) => {
+  const data = await AdminApprovals
+    .find({ hospitalId: req.params.hospitalId })
+    .populate('userId');
+
+  res.status(200).json({
+    status: 'success',
+    results: data.length,
+    data: data
+  })
 });
 
 // export const getSchool = factory.getOne(School);

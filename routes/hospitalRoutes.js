@@ -16,11 +16,17 @@ router.post(
 );
 // Hospital request's approval by ADMIN only
 router.patch(
-  "/hospital-request-approval/:userId/:hospitalId",
+  "/hospital-request-approval/:hospitalId/:userId",
   authController.protect,
   authController.restrictTo("admin"),
   hospitalController.joiningRequestApproval
 );
+// Get All Approval Requests by ADMIN only
+router.get("/:hospitalId/get-approval-requests",
+  authController.protect,
+  authController.restrictTo("admin"),
+  hospitalController.getAllRequests);
+
 // router.use(authController.restrictTo("admin"));
 
 router.get("/registered-hospitals", authController.protect, hospitalController.getAllHospitals);
