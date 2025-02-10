@@ -58,6 +58,13 @@ app.options(
   "*",
   cors({
     origin: [
+      "https://fydp-resourcehive.vercel.app",
+      "https://resourcehive-backend.vercel.app",
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://localhost:3002",
+      "http://localhost:3003",
+      "http://localhost:3005",
       "https://resourcehive.vercel.app",
       "http://localhost:5173",
       "https://resourcehive-b.vercel.app",
