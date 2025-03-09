@@ -14,7 +14,8 @@ dotenv.config({ path: "./config.env" });
 // Database Config
 const DB = process.env.DATABASE_STRING;
 
-mongoose.connect(DB, {}).then(() => console.log("DB Connection Successful!!!"));
+mongoose.connect(DB, { useNewUrlParser: true,
+  useUnifiedTopology: true}).then(() => console.log("DB Connection Successful!!!"));
 
 // App Listening
 const port = process.env.PORT || 5000;

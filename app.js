@@ -68,7 +68,9 @@ app.options(
       "https://resourcehive.vercel.app",
       "http://localhost:5173",
       "https://resourcehive-b.vercel.app",
+      
     ],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     credentials: true,
   })
 );
