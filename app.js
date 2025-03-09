@@ -27,6 +27,30 @@ import hpp from "hpp";
 
 const app = express();
 
+
+
+// Load environment variables
+dotenv.config({ path: "./config.env" });
+
+// 1) GLOBAL MIDDLEWARES
+
+// CORS configuration for production and local development
+
+
+app.use(
+  cors({
+    origin: [
+      "https://fydp-resourcehive.vercel.app",
+      "https://resourcehive.vercel.app",
+      "https://resourcehive-backend.vercel.app", 
+      "http://localhost:5173",
+      "https://resourcehive-b.vercel.app",
+    ],
+    credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: ["Content-Type", "Authorization", "Accept", "Origin"], // ✅ Expanded headers
+  })
+);
 // Serving Static files
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -36,56 +60,49 @@ app.use(express.static(`${__dirname}/public`));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
-// Load environment variables
-dotenv.config({ path: "./config.env" });
+// app.use(
+//   cors({
+//     origin: [
+//       "https://fydp-resourcehive.vercel.app",
+//       "https://resourcehive.vercel.app",
+//       "http://localhost:5173",
+//       "https://resourcehive-b.vercel.app",
+//     ],
+//     credentials: true,
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 
-// 1) GLOBAL MIDDLEWARES
+// Remove the manual Access-Control-Allow-Origin middleware
 
-// CORS configuration for production and local development
-app.use(
-  cors({
-    origin: [
-      "https://resourcehive.vercel.app",
-      "http://localhost:5173",
-      "https://resourcehive-b.vercel.app",
-    ], // Allowed origins
-    credentials: true, // Allow cookies and credentials to be included
-  })
-);
 
-// Preflight OPTIONS request handling
-app.options(
-  "*",
-  cors({
-    origin: [
-      "https://fydp-resourcehive.vercel.app",
-      "https://resourcehive-backend.vercel.app",
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:3002",
-      "http://localhost:3003",
-      "http://localhost:3005",
-      "https://resourcehive.vercel.app",
-      "http://localhost:5173",
-      "https://resourcehive-b.vercel.app",
+
+// // Preflight OPTIONS request handling
+// app.options(
+//   "*",
+//   cors({
+//     origin: [
+//       "https://fydp-resourcehive.vercel.app",
+//       "https://resourcehive-backend.vercel.app",
+//       "http://localhost:3000",
+//       "http://localhost:3001",
+//       "http://localhost:3002",
+//       "http://localhost:3003",
+//       "http://localhost:3005",
+//       "https://resourcehive.vercel.app",
+//       "http://localhost:5173",
+//       "https://resourcehive-b.vercel.app",
       
-    ],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-  })
-);
+//     ],
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//     credentials: true,
+//   })
+// );
 
-// Manually set Access-Control-Allow-Origin for all responses
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://fydp-resourcehive.vercel.app");
-  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  next();
-});
 
-// Preflight OPTIONS request handling
-app.options("*", cors());
+// // Preflight OPTIONS request handling
+// app.options("*", cors());
 
 // Set Security HTTP Headers
 app.use(helmet());
