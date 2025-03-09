@@ -48,7 +48,7 @@ app.use(
     ],
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    allowedHeaders: ["Content-Type", "Authorization", "Accept", "Origin"], // ✅ Expanded headers
+    allowedHeaders: ["Content-Type", "Authorization", "Accept", "Origin"], // Expanded headers
   })
 );
 // Serving Static files
@@ -60,49 +60,7 @@ app.use(express.static(`${__dirname}/public`));
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
-// app.use(
-//   cors({
-//     origin: [
-//       "https://fydp-resourcehive.vercel.app",
-//       "https://resourcehive.vercel.app",
-//       "http://localhost:5173",
-//       "https://resourcehive-b.vercel.app",
-//     ],
-//     credentials: true,
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
 
-// Remove the manual Access-Control-Allow-Origin middleware
-
-
-
-// // Preflight OPTIONS request handling
-// app.options(
-//   "*",
-//   cors({
-//     origin: [
-//       "https://fydp-resourcehive.vercel.app",
-//       "https://resourcehive-backend.vercel.app",
-//       "http://localhost:3000",
-//       "http://localhost:3001",
-//       "http://localhost:3002",
-//       "http://localhost:3003",
-//       "http://localhost:3005",
-//       "https://resourcehive.vercel.app",
-//       "http://localhost:5173",
-//       "https://resourcehive-b.vercel.app",
-      
-//     ],
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//     credentials: true,
-//   })
-// );
-
-
-// // Preflight OPTIONS request handling
-// app.options("*", cors());
 
 // Set Security HTTP Headers
 app.use(helmet());

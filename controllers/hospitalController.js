@@ -103,6 +103,26 @@ export const joiningRequestApproval = catchAsync(async (req, res, next) => {
   });
 });
 
+export const joiningRequestRejection = catchAsync(async (req, res, next) => {
+  const approval = await User.findByIdAndUpdate(
+    req.params.userId,
+    {
+      $set: {
+        hospitalId: req.params.hospitalId,
+        role: "user",
+      },
+    },
+    { new: true }
+  );
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      approval,
+    },
+  });
+});
+
 export const joiningTechnicianRequestApproval = catchAsync(async (req, res, next) => {
   const approval = await User.findByIdAndUpdate(
     req.params.userId,

@@ -16,11 +16,22 @@ router.post(
 );
 // Hospital request's approval by ADMIN only
 router.patch(
-  "/hospital-request-approval/:hospitalId/:userId",
+  "/hospital-manager-request-rejected-by-admin/:hospitalId/:userId",
   authController.protect,
   authController.restrictTo("admin"),
   hospitalController.joiningRequestApproval
 );
+
+// Manager's Request Rejected by Admin only
+router.patch(
+  "/hospital-request-approval/:hospitalId/:userId",
+  authController.protect,
+  authController.restrictTo("admin"),
+  hospitalController.joiningRequestRejection
+);
+
+
+
 // Get All Approval Requests by ADMIN only
 router.get("/:hospitalId/get-approval-requests",
   authController.protect,
