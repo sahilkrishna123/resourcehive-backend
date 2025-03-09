@@ -75,6 +75,18 @@ app.options(
   })
 );
 
+// Manually set Access-Control-Allow-Origin for all responses
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://fydp-resourcehive.vercel.app");
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,PUT,PATCH,POST,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
+// Preflight OPTIONS request handling
+app.options("*", cors());
+
 // Set Security HTTP Headers
 app.use(helmet());
 
