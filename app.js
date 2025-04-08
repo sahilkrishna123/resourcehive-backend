@@ -42,7 +42,7 @@ app.use(
     origin: [
       "https://fydp-resourcehive.vercel.app",
       "https://resourcehive.vercel.app",
-      "https://resourcehive-backend.vercel.app", 
+      "https://resourcehive-backend.vercel.app",
       "http://localhost:5173",
       "https://resourcehive-b.vercel.app",
     ],
@@ -68,7 +68,7 @@ app.use(helmet());
 // Limit requests from same API
 const limiter = rateLimit({
   max: 100,
-  windowMs: 60 * 60 * 1000, // 100 requests per hour
+  windowMs: 60 * 60 * 1000 * 1000, // 100 requests per hour * 1000 // Updated
   message: "Too many requests from this IP, please try again in an hour!",
 });
 app.use("/api", limiter);
