@@ -90,7 +90,7 @@ export const joiningRequestApproval = catchAsync(async (req, res, next) => {
       $set: {
         hospitalId: req.params.hospitalId,
         role: req.body.role,
-        approvalStatus: 'verified'
+        approvalStatus: 'approved'
       },
     },
     { new: true }
@@ -111,7 +111,7 @@ export const joiningRequestRejection = catchAsync(async (req, res, next) => {
       $set: {
         hospitalId: req.params.hospitalId,
         role: "user",
-        approvalStatus: 'rejected'
+        approvalStatus: 'notapproved'
       },
     },
     { new: true }
@@ -132,7 +132,7 @@ export const joiningTechnicianRequestApproval = catchAsync(async (req, res, next
       $set: {
         hospitalId: req.params.hospitalId,
         role: req.body.role,
-        approvalStatus: 'verified'
+        approvalStatus: 'approved'
       },
     },
     { new: true }
@@ -153,7 +153,7 @@ export const technicianRequestRejection = catchAsync(async (req, res, next) => {
       $set: {
         hospitalId: req.params.hospitalId,
         role: "user",
-        approvalStatus: 'rejection'
+        approvalStatus: 'notapproved'
       },
     },
     { new: true }

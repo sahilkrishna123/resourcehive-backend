@@ -57,7 +57,7 @@ const userSchema = new mongoose.Schema(
     },
     approvalStatus: {
       type: String,
-      enum: ["verified", "rejected", "pending"],
+      enum: ["approved", "notapproved", "pending"],
       default: "pending",
     },
 
