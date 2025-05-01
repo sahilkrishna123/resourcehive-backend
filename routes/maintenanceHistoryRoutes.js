@@ -19,4 +19,8 @@ router
   .get(maintenanceController.getOneMaintenance)
   .patch(maintenanceController.updateMaintenance)
   .delete(maintenanceController.deleteMaintenance);
+
+router.patch("/:maintenanceId/resolveMaintenance", maintenanceController.resolveMaintenance);
 export default router;
+
+// app.use("/api/v1/:hospitalId/:equipmentId/maintenance", maintenanceRouter);

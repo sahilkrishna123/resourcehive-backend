@@ -203,3 +203,24 @@ export const deleteMaintenance = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+export const resolveMaintenance = catchAsync(async (req, res, next) => {
+  const { hospitalId, equipmentId, maintenanceId } = req.params;
+
+  const resolveMaintenance = await MaintenanceHistory.findOneAndUpdate(
+    {maintenanceId},
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  if (!resolveMaintenance) {
+    return next(new AppError("No maintenance record found with that ID", 404));
+  }
+  res.status(200).json({
+    status: "success",
+    data: {
+      maintenance: resolveMaintenance,
+    },
+  }); 
+})

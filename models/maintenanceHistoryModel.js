@@ -20,6 +20,24 @@ const maintenanceHistorySchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  // Resolve Maintenance by technician
+  resolveMaintenance: {
+    type: String,
+    enum: ["resolved", "not-resolved", "pending"],
+    default: "pending"
+  },
+  resolveMaintenanceTimestamp : {
+    type: Date,
+    default: Date.now,
+  },
+  resolverId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
+  resolveDescription: {
+    type: String,
+    default: "", 
+  }
 });
 
 const MaintenanceHistory = mongoose.model(
