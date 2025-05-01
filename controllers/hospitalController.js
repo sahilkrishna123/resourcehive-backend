@@ -7,6 +7,15 @@ import User from "../models/userModel.js";
 import Hospital from "../models/hospitalModel.js";
 import AppError from "../utils/appError.js";
 
+export const getOneHospital = catchAsync(async (req, res, next) => {
+  const hospitalId = req.params.hospitalId;
+  const newData = await Hospital.findById(hospitalId);
+  res.status(200).json({
+    status: 'success',
+    data: newData,
+  });
+});
+
 export const registerHospital = catchAsync(async (req, res, next) => {
   const newData = await Hospital.create(req.body);
   // console.log(newData._id);
@@ -193,8 +202,3 @@ export const getAllTechniciansRequests = catchAsync(async (req, res, next) => {
   });
 });
 
-// export const getSchool = factory.getOne(School);
-// export const getAllSchool = factory.getAll(School);
-
-// export const updateSchool = factory.updateOne(School);
-// export const deleteSchool = factory.deleteOne(School);
