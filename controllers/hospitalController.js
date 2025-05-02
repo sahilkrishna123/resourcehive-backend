@@ -18,12 +18,10 @@ export const getOneHospital = catchAsync(async (req, res, next) => {
 
 export const registerHospital = catchAsync(async (req, res, next) => {
   const newData = await Hospital.create(req.body);
-  // console.log(newData._id);
   const updatedUser = await User.findByIdAndUpdate(req.user.id, { hospitalId: newData._id }, {
     new: true,
     runValidators: true,
   })
-  // console.log(updatedUser);
   res.status(201).json({
     status: 'success',
     data: newData

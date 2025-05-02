@@ -5,8 +5,8 @@ import * as hospitalController from "../controllers/hospitalController.js";
 
 const router = express.Router();
 
-// Get One Hospital for Admin Only
-router.get("/:hospitalId",authController.protect, hospitalController.getOneHospital);
+// Get One Hospital
+router.get("/getOne/:hospitalId",authController.protect, hospitalController.getOneHospital);
 
 // Hospital joining request by users
 router.post(
