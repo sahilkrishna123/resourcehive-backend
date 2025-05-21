@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end; /* Align to the right */
+  min-height: 100vh;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: rgba(6, 17, 29, 255);
+  color: #fff;
+  padding-right: 20px; /* Add some space from the right edge */
+}
+.typing-text-container {
+  display: flex;
+  justify-content: flex-end; /* Align to the right */
+  align-items: center; /* Vertically center */
+  margin-right: 0px; /* Same space as the buttons */
+  font-size: 10px; /* Adjust font size as needed */
+  color: #fff; /* Text color for contrast */
+  margin-bottom: 0px; /* Add some space between text and buttons */
+  white-space: nowrap;
+  overflow: hidden; /* Ensure the text doesn't overflow */
+  /* Creates the typing cursor effect */
+  width: fit-content;
+}
+
+.typing-text {
+  animation: typing 2.4s steps(30) 1s 1 normal both,
+    blinkCaret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blinkCaret {
+  50% {
+    border-color: transparent;
+  }
+}
+
+.homepage-buttons {
+  display: flex;
+  flex-direction: row; /* Stack buttons vertically */
+  gap: 10px;
+  margin-top: 30px;
+  margin-right: 250px; /* Add space between buttons and typing text */
+}
+
+.button-style {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+
+.button-style:hover {
+  background-color: #555;
+  color: #000;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}

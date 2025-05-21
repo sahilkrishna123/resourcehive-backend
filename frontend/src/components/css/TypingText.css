@@ -1,0 +1,11 @@
+.typing-container {
+  text-align: center;
+/* Dark background */
+  color: #e0e6f1; /* Light grayish text */
+  font-size: 3rem; /* Adjust size */
+  font-weight: bold; /* Bold text */
+  padding: 10px 20px; /* Padding around text */
+  border-radius: 10px; /* Rounded corners */
+  display: inline-block; /* Prevent full-width background */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

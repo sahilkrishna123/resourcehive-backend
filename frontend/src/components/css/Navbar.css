@@ -1,0 +1,50 @@
+/* Remove margin and padding from body and html */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for the navigation bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  align-items: center;
+  padding: 20px;
+  background-color: rgba(4, 10, 19, 255);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed; /* Ensure navbar is fixed at the top */
+  top: 0; /* Place the navbar at the very top */
+  left: 0; /* Align it to the left */
+  width: 97.5%; /* Take up the full width of the page */
+  z-index: 1000; /* Keep navbar above other content */
+}
+
+/* Logo style */
+.navbar-logo {
+  font-size: 1.8rem;
+  color: white;
+}
+
+/* Links inside navbar */
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+/* Link styles */
+.navbar-links a {
+  color: white;
+  text-decoration: none; /* No underline by default */
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Link hover effect - No underline, change color and shadow */
+.navbar-links a:hover {
+  color: #ddd; /* Lighter color on hover */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  text-decoration: none; /* Subtle shadow effect */
+}
