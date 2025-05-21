@@ -40,12 +40,13 @@ dotenv.config({ path: "./config.env" });
 app.use(
   cors({
     origin: [
+      "https://resourcehive-frontend.vercel.app",
       "https://fydp-resourcehive.vercel.app",
       "https://resourcehive.vercel.app",
       "https://resourcehive-backend.vercel.app",
       "http://localhost:5173",
       "http://localhost:3000",
-      "https://resourcehive-b.vercel.app",
+      "https://resourcehive-b.vercel.app"
     ],
     credentials: true,
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -113,6 +114,7 @@ app.use("/api/v1/hospitals", hospitalRouter);
 app.use("/api/v1/equipments", equipmentRouter);
 app.use("/api/v1/:hospitalId/:equipmentId/maintenance", maintenanceRouter);
 // api/v1/:hospitalId/:equipmentId/maintenance
+
 // Error Handling
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
@@ -123,4 +125,3 @@ app.use(globalErrorHandler);
 
 export default app;
 
-// for vercellllllllllllllllllllllllllllll remove this when u see!
